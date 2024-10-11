@@ -48,6 +48,13 @@ chrominance_quantization_matrix = [
 
 # Function to apply quantization to an 8x8 block
 def quantize_block(dct_block, quantization_matrix):
+    if (quantization_matrix == "luminance"):
+        quantization_matrix = luminance_quantization_matrix
+    elif (quantization_matrix == "chrominance"):
+        quantization_matrix = chrominance_quantization_matrix
+    else:
+        raise ValueError("Invalid quantization matrix")
+
     quantized_block = [[0] * 8 for _ in range(8)]
 
     for i in range(8):
