@@ -1,9 +1,9 @@
 import cv2
-from color_conversion import rgb_to_YCrCb
-from block_operations import block_8x8, select_channel
-from dct_quantization import dct, quantize_block, luminance_quantization_matrix
-from zigzag_rle import generate_zigzag_pattern, run_length_encoding
-from huffman_encoding import calculate_symbol_frequencies, build_huffman_tree_from_frequencies, generate_huffman_codes_from_tree, encode_data_with_huffman
+from jpeg_compression.color_conversion import rgb_to_YCrCb
+from jpeg_compression.block_operations import block_8x8, select_channel
+from jpeg_compression.dct_quantization import dct, quantize_block
+from jpeg_compression.zigzag_rle import generate_zigzag_pattern, run_length_encoding
+from jpeg_compression.huffman_encoding import calculate_symbol_frequencies, build_huffman_tree_from_frequencies, generate_huffman_codes_from_tree, encode_data_with_huffman
 
 # Read the image
 img = cv2.imread('input_image.jpeg')
@@ -31,7 +31,7 @@ for i in range(8):
     print(round(dct[i][j]), end="\t")
   print()
 
-quantized_block = quantize_block(dct_result, luminance_quantization_matrix)
+quantized_block = quantize_block(dct_result, "luminance")
 print("\nQuantized block\n")
 for i in range(8):
   for j in range(8):
